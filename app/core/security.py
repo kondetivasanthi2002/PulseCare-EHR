@@ -4,11 +4,11 @@ Handles password hashing with bcrypt, JWT token generation & verification, role-
 and session management for Healthcare System Users (Doctors, Nurses, Patients, Admins, Billing).
 """
 
+import bcrypt
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional, Union
 from enum import Enum
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from pydantic import BaseModel, Field
 
 from app.core.config import settings
@@ -26,10 +26,6 @@ class UserRole(str, Enum):
     PHARMACIST = "PHARMACIST"
 
 
-# Password Hashing Context
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
 class TokenData(BaseModel):
     """JWT Payload Structure."""
     user_id: str
@@ -42,17 +38,24 @@ class TokenData(BaseModel):
 
 
 class SecurityEngine:
-    """Security engine for authentication and access token generation."""
+    """Security engine for authentication and access token generation using direct bcrypt."""
 
     @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
         """Verifies a plain password against the stored bcrypt hash."""
-        return pwd_context.verify(plain_password, hashed_password)
+        try:
+            pwd_bytes = plain_password[:72].encode('utf-8')
+            hash_bytes = hashed_password.encode('utf-8')
+            return bcrypt.checkpw(pwd_bytes, hash_bytes)
+        except Exception:
+            return False
 
     @staticmethod
     def get_password_hash(password: str) -> str:
         """Generates a secure bcrypt hash for a given user password."""
-        return pwd_context.hash(password)
+        pwd_bytes = password[:72].encode('utf-8')
+        salt = bcrypt.gensalt()
+        return bcrypt.hashpw(pwd_bytes, salt).decode('utf-8')
 
     @staticmethod
     def create_access_token(

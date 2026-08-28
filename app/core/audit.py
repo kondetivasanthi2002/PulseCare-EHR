@@ -50,7 +50,8 @@ class HIPAAAuditLog(Base):
 
     def compute_integrity_hash(self) -> str:
         """Calculates SHA-256 HMAC integrity hash to make the audit log immutable and tamper-evident."""
-        raw_data = f"{self.id}|{self.timestamp.isoformat()}|{self.action_type}|{self.user_id}|{self.patient_id}|{self.resource_type}|{self.resource_id}|{settings.SECRET_KEY}"
+        ts_str = self.timestamp.isoformat() if self.timestamp else ""
+        raw_data = f"{self.id}|{ts_str}|{self.action_type}|{self.user_id}|{self.patient_id}|{self.resource_type}|{self.resource_id}|{settings.SECRET_KEY}"
         return hashlib.sha256(raw_data.encode('utf-8')).hexdigest()
 
 
@@ -70,7 +71,10 @@ class AuditLogger:
         details: Optional[Dict[str, Any]] = None
     ) -> HIPAAAuditLog:
         """Instantiates an audited record with computed cryptographic integrity hash."""
+        now = datetime.now(timezone.utc)
         entry = HIPAAAuditLog(
+            id=str(uuid.uuid4()),
+            timestamp=now,
             action_type=action_type.value,
             user_id=user_id,
             user_role=user_role,
