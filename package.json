@@ -1,0 +1,24 @@
+{
+  "name": "pulsecare-ehr",
+  "version": "2.4.0",
+  "description": "PulseCare EHR & Practice Management System",
+  "main": "main.py",
+  "scripts": {
+    "start": "python main.py",
+    "dev": "python -m uvicorn app.main:app --reload",
+    "server": "python server.py",
+    "test": "pytest tests/ -v",
+    "seed": "python -m scripts.seed"
+  },
+  "keywords": [
+    "healthcare",
+    "ehr",
+    "hipaa",
+    "fhir",
+    "hl7",
+    "fastapi",
+    "python"
+  ],
+  "author": "PulseCare Team",
+  "license": "MIT"
+}
