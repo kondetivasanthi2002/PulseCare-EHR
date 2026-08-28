@@ -59,4 +59,4 @@ PulseCare adheres to HIPAA Security Rule guidelines:
 
 ## License
 
-MIT License - see LICENSE file for details.
+Proprietary - All Rights Reserved. Confidential software. Not licensed under any open source license.

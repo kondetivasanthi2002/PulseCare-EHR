@@ -3,6 +3,8 @@
   "version": "2.4.0",
   "description": "PulseCare EHR & Practice Management System",
   "main": "main.py",
+  "license": "UNLICENSED",
+  "private": true,
   "scripts": {
     "start": "python main.py",
     "dev": "python -m uvicorn app.main:app --reload",
@@ -19,6 +21,5 @@
     "fastapi",
     "python"
   ],
-  "author": "PulseCare Team",
-  "license": "MIT"
+  "author": "PulseCare Team"
 }

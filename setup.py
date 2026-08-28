@@ -5,9 +5,8 @@ setup(
     version="2.4.0",
     description="Enterprise Healthcare Management System",
     author="PulseCare Team",
-    license="MIT",
+    license="Proprietary",
     classifiers=[
-        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Topic :: Scientific/Engineering :: Medical Science Apps"
