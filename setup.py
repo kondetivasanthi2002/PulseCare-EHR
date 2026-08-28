@@ -5,6 +5,13 @@ setup(
     version="2.4.0",
     description="Enterprise Healthcare Management System",
     author="PulseCare Team",
+    license="MIT",
+    classifiers=[
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Topic :: Scientific/Engineering :: Medical Science Apps"
+    ],
     packages=find_packages(),
     py_modules=["main", "run", "server", "manage"],
     entry_points={

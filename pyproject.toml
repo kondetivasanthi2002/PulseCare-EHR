@@ -8,6 +8,13 @@ version = "2.4.0"
 description = "Enterprise Healthcare Management & EHR Platform"
 readme = "README.md"
 requires-python = ">=3.9"
+license = { text = "MIT" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Medical Science Apps"
+]
 dependencies = [
     "fastapi>=0.104.0",
     "uvicorn>=0.24.0",
